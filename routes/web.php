@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\CekFaktaController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +18,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/berita', function () {
-    return view('berita');
-});
+
 Route::get('/', function () {
     return view('dashboard');
 });
+Route::get('/',[DashboardController::class, 'dashboard'])->name('dashboard');
+
+Route::get('/login',[LoginController::class, 'indexLogin'])->name('indexLogin');
+Route::post('/loginSS',[LoginController::class, 'buatSession'])->name('buatSession');
+Route::get('/logout',[DashboardController::class, 'logout'])->name('logout');
+
+// Route::post('/login',[LoginController::class, 'login'])->name('login');
+    
+//berita
+Route::group(['prefix' => '/berita'], function(){
+    Route::get('/',[BeritaController::class, 'indexBerita'])->name('indexberita');
+});
+
+//laporan
+Route::group(['prefix' => '/laporan'], function(){
+    Route::get('/',[LaporanController::class, 'indexLaporan'])->name('indexLaporan');
+});
+
+//cek fakta
+Route::group(['prefix' => '/cek-fakta'], function(){
+    Route::get('/',[CekFaktaController::class, 'indexCekFakta'])->name('indexCekFakta');
+});
+
