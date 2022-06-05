@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Kreait\Firebase\Contract\Database;
-use Carbon\Carbon;
 
 class BeritaController extends Controller
 {
@@ -15,6 +14,24 @@ class BeritaController extends Controller
 
     public function indexBerita()
     {
-        return view('berita.berita');
+        $berita = $this->database->getReference('berita')->getValue();
+        if($berita == null){
+            $berita = [];
+        }
+        return view('berita.berita' , compact('berita'));
+       
     }
+
+    public function cekBerita(Request $request, $id){
+        $key = $id;
+        $input = [];
+        $input['status']=$request->cekBerita;
+       
+        $res_update_date = $this->database->getReference($this->tableName)->getChild($key)->update($input);
+        if($res_update_date){
+            return redirect('/berita');
+        }
+    }
+
+   
 }

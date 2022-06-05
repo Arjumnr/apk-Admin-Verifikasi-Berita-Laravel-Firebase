@@ -33,7 +33,7 @@
                     <span>Laporan</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/cek-fakta">
+                <a class="nav-link" href="/cekFakta">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Cek Fakta</span></a>
             </li>

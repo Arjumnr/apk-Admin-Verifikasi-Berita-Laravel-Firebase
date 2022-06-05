@@ -19,9 +19,7 @@ use App\Http\Controllers\DashboardController;
 */
 
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+
 Route::get('/',[DashboardController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/login',[LoginController::class, 'indexLogin'])->name('indexLogin');
@@ -38,11 +36,12 @@ Route::group(['prefix' => '/berita'], function(){
 Route::group(['prefix' => '/laporan'], function(){
     Route::get('/',[LaporanController::class, 'indexLaporan'])->name('indexLaporan');
     Route::put('/cekLaporan/{id}',[LaporanController::class, 'cekLaporan'])->name('cekLaporan');
-    Route::get('/cek',[LaporanController::class, 'cek'])->name('cek');
 });
 
 //cek fakta
-Route::group(['prefix' => '/cek-fakta'], function(){
+Route::group(['prefix' => '/cekFakta'], function(){
     Route::get('/',[CekFaktaController::class, 'indexCekFakta'])->name('indexCekFakta');
+    Route::put('/cekFakta/{id}',[CekFaktaController::class, 'cekFakta'])->name('cekFakta');
+
 });
 
