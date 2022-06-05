@@ -28,7 +28,6 @@ Route::get('/login',[LoginController::class, 'indexLogin'])->name('indexLogin');
 Route::post('/loginSS',[LoginController::class, 'buatSession'])->name('buatSession');
 Route::get('/logout',[DashboardController::class, 'logout'])->name('logout');
 
-// Route::post('/login',[LoginController::class, 'login'])->name('login');
     
 //berita
 Route::group(['prefix' => '/berita'], function(){
@@ -38,6 +37,8 @@ Route::group(['prefix' => '/berita'], function(){
 //laporan
 Route::group(['prefix' => '/laporan'], function(){
     Route::get('/',[LaporanController::class, 'indexLaporan'])->name('indexLaporan');
+    Route::put('/cekLaporan/{id}',[LaporanController::class, 'cekLaporan'])->name('cekLaporan');
+    Route::get('/cek',[LaporanController::class, 'cek'])->name('cek');
 });
 
 //cek fakta
