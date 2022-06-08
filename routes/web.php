@@ -6,6 +6,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\CekFaktaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\tesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::get('/',[DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/tes',[tesController::class, 'tes'])->name('tes');
 
 Route::get('/login',[LoginController::class, 'indexLogin'])->name('indexLogin');
 Route::post('/loginSS',[LoginController::class, 'buatSession'])->name('buatSession');
@@ -30,6 +32,7 @@ Route::get('/logout',[DashboardController::class, 'logout'])->name('logout');
 //berita
 Route::group(['prefix' => '/berita'], function(){
     Route::get('/',[BeritaController::class, 'indexBerita'])->name('indexberita');
+    Route::get('/tambahBerita',[BeritaController::class, 'tambahBerita'])->name('tambahBerita');
 });
 
 //laporan
