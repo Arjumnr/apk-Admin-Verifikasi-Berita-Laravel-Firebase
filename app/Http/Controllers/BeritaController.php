@@ -39,12 +39,37 @@ class BeritaController extends Controller
     }
 
     public function tambahBerita(Request $request){ 
+        // dd($request->image);
         
-        dd($request);
+        $image = $request->image;
+        $fileName = $image->getClientOriginalName();
+        $gambarBerita = app('firebase.firestore')->database()->collection('Images')->document('112589068336054899743'); 
+        $firebase_storage_path = 'gambarBerita/';
+        $name = $gambarBerita->id();
+        $local_folder = public_path('firebase-temp-uploads') .'/';
+        $extension = $image->getClientOriginalExtension();
+        $file = $name . '.' . $extension;
+        $fixMove = $image->move($local_folder, $file);
+        if($fixMove){
+           $uploadedfile = fopen($local_folder . $file, 'r');
+           $cek = app('firebase.storage')->getBucket()->upload($uploadedfile, [
+            'name' => $firebase_storage_path . $file,
+            'metadata' => [
+                'contentType' => $image->getClientMimeType(),
+                'cacheControl' => 'public, max-age=31536000',
+            ],
+            ]);
+            
+            // link($local_folder . $file);
+            dd(link($local_folder . $file));
+        }
+        
+
+
         $created_at = Carbon::today()->toDateString();
  
         $pos_data = [ 
-            'image' => $image,
+            'image' => $file,
             'judul' => $request->judul,
             'link' => $request->link,
             'desc' => $request->desc,
@@ -60,6 +85,15 @@ class BeritaController extends Controller
         }
         
         
+    }
+
+    public function deleteBerita($id){
+        $delete_berita = $this->database->getReference($this->tableName)->getChild($id)->remove();
+        if($delete_berita){
+            return redirect('/berita')->with('success', 'Data Berhasil Dihapus');
+        }else{
+            return redirect('/berita')->with('error', 'Data Gagal Dihapus');
+        }
     }
 
    

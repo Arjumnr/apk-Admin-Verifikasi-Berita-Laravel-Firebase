@@ -32,7 +32,8 @@ Route::get('/logout',[DashboardController::class, 'logout'])->name('logout');
 //berita
 Route::group(['prefix' => '/berita'], function(){
     Route::get('/',[BeritaController::class, 'indexBerita'])->name('indexberita');
-    Route::get('/tambahBerita',[BeritaController::class, 'tambahBerita'])->name('tambahBerita');
+    Route::post('/tambahBerita',[BeritaController::class, 'tambahBerita'])->name('tambahBerita');
+    Route::get('/deleteBerita/{id}',[BeritaController::class, 'deleteBerita'])->name('deleteBerita');
 });
 
 //laporan

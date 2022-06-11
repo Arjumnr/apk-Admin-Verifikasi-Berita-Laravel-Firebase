@@ -70,7 +70,7 @@
                                                 <td> 
                                                     <a href="{{ $row['link'] }}" target="_blank"> {{ $row['link'] }} </a>
                                                 </td>
-                                                <td> {{ $row['image'] }} </td>
+                                                <td> <img src="{{ $row['image'] }}" width="100" height="100"> </td>  
                                                 
                                                 <td> {{ $row['status'] }} </td>
                                                 <td>

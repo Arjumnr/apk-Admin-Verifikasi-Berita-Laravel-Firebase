@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "google/cloud-firestore": "^1.23",
+        "grpc/grpc": "1.38",
         "guzzlehttp/guzzle": "^7.2",
         "kreait/firebase-php": "^6.3",
         "kreait/laravel-firebase": "^4.1",

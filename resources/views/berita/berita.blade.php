@@ -71,16 +71,15 @@
                                         @forelse($berita as $key => $row)
                                             <tr>
                                                 <th scope="row">{{ $no++ }}</th>
-                                                {{-- <td> {{ $row['image'] }} </td> --}}
-                                                {{-- <td><img src="{{ asset('storage/'.$image) }}" width="100px" height="100px"></td> --}}
-                                                {{-- <td><img src="https://firebasestorage.googleapis.com/v0/b/rpl-cc.appspot.com/o/gambarBerita?alt=media&token=a07d8f0e-2503-4132-90cf-03cd515163a6" alt="" width="50px" height="50px" ></td> --}}
+                                                {{-- <td><img src="{{ asset('storage/'.$row['image']) }}" alt="" width="100px"></td> --}}
+                                                <td> <img src="{{ $row['image'] }}" width="100" height="100"> </td>
                                                 <td> {{ $row['judul'] }} </td>
                                                 <td> {{ $row['link'] }} </td>
                                                 <td> {{ $row['desc'] }} </td>
                                                 <td> {{ $row['tanggal_buat'] }} </td>
                                                 <td><div class="d-grid gap-2 d-md-flex justify-content-around">
-                                                    <button class="btn btn-warning me-md-2" name="edit" type="button">Edit</button>
-                                                    <button class="btn btn-danger" name="hapus" type="button">Hapus</button>
+                                                    <a href="/berita/edit/{{ $key }}"><button class="btn btn-warning me-md-2" name="edit" type="button">Edit</button></a>
+                                                    <a href="/berita/deleteBerita/{{ $key }}"><button class="btn btn-danger" name="hapus" type="button">Hapus</button></a>
                                                   </div></td>
                                             </tr>
                                             
