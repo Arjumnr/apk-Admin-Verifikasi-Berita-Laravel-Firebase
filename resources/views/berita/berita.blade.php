@@ -67,7 +67,6 @@
                                     <tbody>
 
                                         @php $no = 1; @endphp
-
                                         @forelse($berita as $key => $row)
                                             <tr>
                                                 <th scope="row">{{ $no++ }}</th>

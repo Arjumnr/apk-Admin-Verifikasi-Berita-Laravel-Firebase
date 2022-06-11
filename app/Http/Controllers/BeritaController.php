@@ -100,5 +100,16 @@ class BeritaController extends Controller
         }
     }
 
+    public function editBerita($id){
+        $key = $id;
+        $edit_data = $this->database->getReference($this->tableName)->getChild($key)->getValue(); 
+        if($edit_data){
+            return view('admin.berita.edit_berita', compact('edit_data' , 'key'));
+        }else{
+            return redirect()->route('dataBerita');
+        }
+        return view('berita.editBerita' , compact('berita'));
+    }
+
    
 }
