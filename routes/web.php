@@ -31,8 +31,10 @@ Route::get('/logout',[DashboardController::class, 'logout'])->name('logout');
     
 //berita
 Route::group(['prefix' => '/berita'], function(){
-    Route::get('/',[BeritaController::class, 'indexBerita'])->name('indexberita');
+    Route::get('/',[BeritaController::class, 'indexBerita'])->name('indexBerita');
     Route::post('/tambahBerita',[BeritaController::class, 'tambahBerita'])->name('tambahBerita');
+    Route::get('/edit/{id}',[BeritaController::class, 'editBerita'])->name('editBerita');
+    Route::put('/update/{id}',[BeritaController::class, 'update'])->name('update');
     Route::get('/deleteBerita/{id}',[BeritaController::class, 'deleteBerita'])->name('deleteBerita');
 });
 
