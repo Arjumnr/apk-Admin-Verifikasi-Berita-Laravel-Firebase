@@ -39,37 +39,41 @@ class BeritaController extends Controller
     }
 
     public function tambahBerita(Request $request){ 
-        // dd($request->image);
-        
+
+        $request->validate([
+            
+            'image' => 'required | image | mimes:jpeg,png,jpg,gif,svg ',
+        ]);
         $image = $request->image;
         $fileName = $image->getClientOriginalName();
-        $gambarBerita = app('firebase.firestore')->database()->collection('Images')->document('112589068336054899743'); 
+        
+        $gambarBerita = app('firebase.firestore')->database()->collection('Images')->document($fileName); 
         $firebase_storage_path = 'gambarBerita/';
         $name = $gambarBerita->id();
         $local_folder = public_path('firebase-temp-uploads') .'/';
         $extension = $image->getClientOriginalExtension();
-        $file = $name . '.' . $extension;
+        $file = $name;
         $fixMove = $image->move($local_folder, $file);
         if($fixMove){
            $uploadedfile = fopen($local_folder . $file, 'r');
-           $cek = app('firebase.storage')->getBucket()->upload($uploadedfile, [
+            app('firebase.storage')->getBucket()->upload($uploadedfile, [
             'name' => $firebase_storage_path . $file,
             'metadata' => [
                 'contentType' => $image->getClientMimeType(),
                 'cacheControl' => 'public, max-age=31536000',
             ],
             ]);
+
             
             // link($local_folder . $file);
-            dd(link($local_folder . $file));
         }
         
-
+        $downloadUrl = app('firebase.storage')->getBucket()->object($firebase_storage_path . $file)->signedUrl(Carbon::now()->addMinutes(5));
 
         $created_at = Carbon::today()->toDateString();
  
         $pos_data = [ 
-            'image' => $file,
+            'image' => $downloadUrl,
             'judul' => $request->judul,
             'link' => $request->link,
             'desc' => $request->desc,
