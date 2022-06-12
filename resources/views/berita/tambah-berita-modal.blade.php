@@ -34,7 +34,7 @@
                   <div class="row">
                     <label class="col-sm-3 control-label text-right">Link Berita <span class="text-red">*</span></label>         
                   <div class="col-sm-8">
-                    <input type="link" class="form-control" id="link" required name="link" placeholder="Paste Link Berita..." ></div>
+                    <input type="link" class="form-control" required name="link" placeholder="Paste Link Berita..." ></div>
                   </div>
                 </div>
                 <div class="form-group">
