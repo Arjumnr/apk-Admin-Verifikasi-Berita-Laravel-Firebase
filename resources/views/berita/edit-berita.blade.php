@@ -40,9 +40,11 @@
                           <div class="form-group">
                             <label for="image">Gambar</label>
                             <div class="custom-file">
-                              <input value="{{ $edit_data['image'] }}" name="image" type="file" class="custom-file-input" id="customFile">
+                              <input value="{{ $edit_data['image'] }}" name="image" type="file" class="custom-file-input" >
+                              <input value="{{ $edit_data['image'] }}" name="image" type="text" class="custom-file-input" >
                               <label class="custom-file-label" for="customFile">{{$edit_data['image']}}</label>
                             </div>
+                            
                           </div>
                             <div class="form-group">
                               <label for="judul">Judul</label>

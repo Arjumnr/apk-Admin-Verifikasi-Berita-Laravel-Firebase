@@ -50,6 +50,7 @@ class BeritaController extends Controller
         $gambarBerita = app('firebase.firestore')->database()->collection('Images')->document($fileName); 
         $firebase_storage_path = 'gambarBerita/';
         $name = $gambarBerita->id();
+
         $local_folder = public_path('firebase-temp-uploads') .'/';
         $extension = $image->getClientOriginalExtension();
         $file = $name;
@@ -59,16 +60,16 @@ class BeritaController extends Controller
             app('firebase.storage')->getBucket()->upload($uploadedfile, [
             'name' => $firebase_storage_path . $file,
             'metadata' => [
-                'contentType' => $image->getClientMimeType(),
-                'cacheControl' => 'public, max-age=31536000',
+                'contentType' => 'image/jpeg',
             ],
+
             ]);
 
             
-            // link($local_folder . $file);
+            
         }
         
-        $downloadUrl = app('firebase.storage')->getBucket()->object($firebase_storage_path . $file)->signedUrl(Carbon::now()->addMinutes(5));
+        $downloadUrl = app('firebase.storage')->getBucket()->object($firebase_storage_path . $file)->signedUrl(Carbon::now()->addYear(1));
 
         $created_at = Carbon::today()->toDateString();
  
@@ -113,7 +114,7 @@ class BeritaController extends Controller
     }
 
     public function update(Request $request, $id){
-        dd($request->all());
+        // dd($request->all());
         $key = $id;
         if($request->hasFile('image')){
             $request->validate([
@@ -133,16 +134,15 @@ class BeritaController extends Controller
                $uploadedfile = fopen($local_folder . $file, 'r');
                 app('firebase.storage')->getBucket()->upload($uploadedfile, [
                 'name' => $firebase_storage_path . $file,
-                'metadata' => [
-                    'contentType' => $image->getClientMimeType(),
-                    'cacheControl' => 'public, max-age=31536000',
-                ],
+                
                 ]);
 
                 
-                // link($local_folder . $file);
+
             }
-            $downloadUrl = app('firebase.storage')->getBucket()->object($firebase_storage_path . $file)->signedUrl(Carbon::now()->addMinutes(5));
+            
+        $downloadUrl = app('firebase.storage')->getBucket()->object($firebase_storage_path . $file)->signedUrl(Carbon::now()->addYear(1));
+
 
             $created_at = Carbon::today()->toDateString();
      
